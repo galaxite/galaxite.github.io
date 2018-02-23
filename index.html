@@ -135,18 +135,18 @@
 	.news:hover {
 		color: #e37fad !important;
 	}
-	.reddit-cat a {
+	.chan-cat a {
 		color: #7fdfe3 !important;
 	}
-	.reddit-cat {
+	.chan-cat {
 		border-right: 1px solid #7fdfe3;
 		color: #7fdfe3 !important;
 	}
-	.reddit {
+	.chan {
 		cursor: pointer;
 		transition: color 0.5s ease;
 	}
-	.reddit:hover {
+	.chan:hover {
 		color: #7fdfe3 !important;
 	}
 	.category {
@@ -386,11 +386,11 @@ $(document).ready(function(){
 
 $(".container-rect").addClass("animated bounceInUp");	
 	
-$(".reddit-links").mouseover(function(){
-	$('.reddit-cat').css("border-right", "2px solid #7fdfe3");
+$(".chan-links").mouseover(function(){
+	$('.chan-cat').css("border-right", "2px solid #7fdfe3");
 });
-$(".reddit-links").mouseout(function(){
-	$('.reddit-cat').css("border-right", "1px solid #7fdfe3");
+$(".chan-links").mouseout(function(){
+	$('.chan-cat').css("border-right", "1px solid #7fdfe3");
 });
 $(".news-links").mouseover(function(){
 	$('.news-cat').css("border-right", "2px solid #e37fad");
