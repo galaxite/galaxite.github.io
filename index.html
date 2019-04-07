@@ -1,599 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
-	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet"> 
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
-	<title>New Tab</title>
-</head>
-
-<body>
-	<div id="top">
-		<div class="top-left">
-			<div class="pad-left">
-			<p class="date"><span id="weekday"></span> <span id="month-date"></span></p>
-			<p class="weather-widget"><i class="fa fa-gear"> </i> <span id="weather"></span></p>
-			<div class="settings">
-				<p class="x">x</p>
-				<p>City: <input class="enter entercity" type="text" /></p>
-				<p>Country: <input class="enter entercountry" type="text" /></p>
-				<p>Please use ISO 3166 country codes. <br/>Find your country code here: <a href="https://www.iso.org/obp/ui/#search">iso.org</a></p>
-				<ul>
-					<li>
-						<input type="radio" id="cel" name="unit" value="cel">
-    					<label for="cel">&deg;C</label>
-					</li>
-					<li>
-    					<input type="radio" id="far" name="unit" value="far">
-    					<label for="far">&deg;F</label>
-					</li>
-				</ul>
-				<button id="save">save</button>
-			</div>
-			<p id="btc-price">BTC Price: </p>
-			</div>
-		</div>
-		<div class="top-right">
-	    <div class="pad-right">
-			<a href="" id="news-title-link"><p><span id="news-title"></span></p></a>
-			<p><span id="score-3"></span></p>
-			<p><span id="next-post-news">next post &rarr;</span></p>
-		</div>
-		</div>
-	</div>
-	
-	<div id="bottom">
-		<div class="container-rect">
-			<div id="search">
-				<input id="search-bar" type="text" placeholder="search" />
-				<div id="links">
-					<p class="chan-links">
-						<a href=""><div class="link category chan-cat">chans</div></a> 
-						<a id="chan-link-1" href="https://8ch.net/tech/catalog.html"><span class="link chan chan1">/tech/</span></a> 
-						<a id="chan-link-2" href="https://boards.4chan.org/g/catalog"><span class="link chan chan2">/g/</span></a> 
-						<a id="chan-link-3" href="https://boards.4chan.org/an/catalog"><span class="link chan chan3">/an/</span></a>
-						<a id="chan-link-4" href="https://boards.4chan.org/ck/catalog"><span class="link chan chan4">/ck/</span></a>
-						<a id="chan-link-5" href="https://murdercube.com/files/"><span class="link chan chan5">/cube/</span></a>
-						<a id="chan-link-6" href="https://boards.4chan.org/wg/catalog"><span class="link chan chan6">/wg/</span></a>
-						<a id="chan-link-7" href="https://wallhalla.com/"><span class="link chan chan7">/wall/</span></a>
-					</p>
-					<p class="news-links">
-						<a href=""><div class="link category news-cat">news</div></a> 
-						<a id="news-link-1" href="https://forum.voidlinux.eu/latest"><span class="link news news1">Void Forum</span></a> 
-						<a id="news-link-2" href="https://distrowatch.com/"><span class="link news news2">DistroWatch</span></a> 
-						<a id="news-link-3" href="https://kiwifarms.net/"><span class="link news news3">KiwiFarms</span></a> 
-					</p>
-					<p class="code-links">
-						<a href=""><div class="link category code-cat">code</div></a> 
-						<a id="code-link-1" href="https://github.com/galaxite"><span class="link code code1">github</span></a> 
-						<a id="code-link-2" href="https://gitgud.io/users/sign_in"><span class="link code code2">gitgud</span></a>
-						<a id="code-link-3" href="https://doc.rust-lang.org/book/second-edition/ch01-00-introduction.html"><span class="link code code3">rust</span></a>
-						<a id="code-link-4" href="https://github.com/josephmisiti/awesome-machine-learning/blob/master/books.md"><span class="link code code4">machine learning</span></a> 
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-<style>
-	@font-face {
-    font-family: 'nationalelight';
-    src: url('fonts/nationale-light-webfont.woff2') format('woff2'),
-         url('fonts/nationale-light-webfont.woff') format('woff'),
-		 url('fonts/nationale-light-webfont.otf') format('otf');
-    font-weight: normal;
-    font-style: normal;
-
-	}
-	body {
-		font-family: 'nationalelight', 'Quicksand';
-		margin: 0;
-		background-color: #1f1f1f;
-	}
-	p {
-		font-family: 'nationalelight', 'Quicksand';
-		color: rgb(227, 131, 127);
-		font-size: 15px;
-	}
-	a {
-		color: #7fdfe3;
-		text-decoration: none;
-	}
-	input[type=text] {
-		color: #7fe383;
-		font-family: 'nationalelight', 'Quicksand';
-		font-size: 15px;
-	}
-	#links {
-		padding-left: 5%;
-		margin-top: 3em;
-		margin-bottom: 3em;
-	}
-	.code-cat a {
-		color: #7fe383 !important;
-	}
-	.code-cat {
-		border-right: 1px solid #7fe383;
-	}
-	.code {
-		cursor: pointer;
-		transition: color 0.5s ease;
-	}
-	.code:hover {
-		color: #7fe383 !important;
-	}
-	
-	.news-cat a {
-		color: #e37fad !important;
-	}
-	.news-cat {
-		border-right: 1px solid #e37fad;
-		color: #e37fad !important;
-	}
-	.news {
-		cursor: pointer;
-		transition: color 0.5s ease;
-	}
-	.news:hover {
-		color: #e37fad !important;
-	}
-	.chan-cat a {
-		color: #7fdfe3 !important;
-	}
-	.chan-cat {
-		border-right: 1px solid #7fdfe3;
-		color: #7fdfe3 !important;
-	}
-	.chan {
-		cursor: pointer;
-		transition: color 0.5s ease;
-	}
-	.chan:hover {
-		color: #7fdfe3 !important;
-	}
-	.category {
-		padding-right: 14px;
-		width: 50px;
-		float: left;
-	}
-	.link {
-		margin-right: 14px;
-		color: #e3b57f;
-	}
-	.link.news a {
-		color: #e3b57f;
-	}
-	.link.news a:hover {
-		color: #e37fad !important;
-	}
-	#search-bar {
-    	width: 90%;
-    	border-bottom: 1px solid #7fe383;
-		border-top: 0;
-		border-left: 0;
-		border-right: 0;
-		color: #7fe383;
-    	padding: 10px;
-		margin-left: 5%;
-		background-color: transparent;
-		font-size: 15px;
-		text-align: center;
-	}
-	::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-		font-family: 'nationalelight', 'Quicksand';
-		color: #7fe383;
-		opacity: 1;
-	}
-	:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-		font-family: 'nationalelight', 'Quicksand';
-		color: #7fe383;
-		opacity: 1;
-	}
-	::-moz-placeholder { /* Mozilla Firefox 19+ */
-		font-family: 'nationalelight', 'Quicksand';
-		color: #7fe383;
-		opacity: 1;
-	}
-	:-ms-input-placeholder { /* Internet Explorer 10-11 */
-		font-family: 'nationalelight', 'Quicksand';
-		color: #7fe383;
-		opacity: 1;
-	}
-	::-ms-input-placeholder { /* Microsoft Edge */
-		font-family: 'nationalelight', 'Quicksand';
-		color: #7fe383;
-		opacity: 1;
-	}
-	.fa-gear {
-		cursor: pointer;
-	}
-	.enter {
-		border: 0;
-		border-bottom: 1px solid rgb(227, 131, 127);
-		background-color: transparent;
-	}
-	#news-title {
-		color: #7fe383;
-	}
-	#score-3 {
-		color: #e37fad;
-	}
-	#save {
-		border: 1px solid #e37fad;
-		background-color: transparent;
-		padding: 5px 10px;
-		width: 100%;
-		margin: 0 auto;
-		color: #e37fad;
-		cursor: pointer;
-		font-family: 'nationalelight', 'Quicksand';
-		font-size: 15px;
-	}
-	.x {
-		position: absolute;
-		color: #e37fad;
-		right: 12px;
-		top: 5px;
-		padding: 0;
-		margin: 0;
-		cursor: pointer;
-	}
-	.date {
-		color: #7fe383;
-	}
-	.weather-widget {
-		color: #e37fad;
-	}
-	#btc-price {
-		color: #e3b57f;
-	}
-	#top {
-		border: 1px solid rgb(227, 131, 127);
-		background-color: #1f1f1f;
-		height: 130px;
-		width: calc(100% - 2px);
-	}
-	#bottom {
-		background-color: #1F1F1F;
-		height: 69%;
-		width: 100%;
-		padding-top: 60px;
-	}
-	.container-rect {
-		background: transparent;
-		height: auto;
-		width: 700px;
-		border: 1px solid rgb(227, 131, 127);
-		position: relative;
-		top: 15%;
-		margin: 0 auto;
-		
-	}
-	#next-post-news {
-		cursor: pointer;
-		color: #e3b57f;
-	}
-	h1, h2, h3, p {
-		font-family: 'nationalelight', 'Quicksand';
-	}
-	.title {
-		text-transform: uppercase;
-		letter-spacing: 2px;
-		color: white;
-		text-align: center;
-	}
-	#searchbar {
-		background-color: transparent;
-		border: 0;
-		width: 90%;
-		text-align: center;
-	}
-	.settings {
-		width: 300px; 
-		background-color: #1f1f1f;
-		border: 1px solid #e37fad;
-		position: absolute;
-		top: 80px;
-		padding: 1em;
-	}
-	.pad-left {
-		padding-left: 1em;
-	}
-	.pad-right {
-		padding-left: 1em;
-	}
-	.top-left {
-		width: 50%;
-		border-right: 1px solid rgb(227, 131, 127);
-		float: left;
-		height: 100%;
-	}
-	.top-right {
-    	width: calc(50% - 1px);
-    	float: left;
-		height: 100%;
-	}
-	hr {
-		border: 0; 
-		height: 2px; 
-		background-image: linear-gradient(to right, rgba(227, 131, 127, 0), rgba(227, 131, 127, 0.75), rgba(227, 131, 127, 0));
-	}
-	/* radio buttons */
-	ul {
-		list-style: none;
-		margin: 0;
-		padding: 0;
-		margin-bottom: 1em;
-		text-align: center;
-	}
-
-	label[for="far"], label[for="cel"] {
-		cursor: pointer;
-		border: 1px solid rgb(227, 131, 127);
-		padding: 4px;
-	}	
-	
-	ul li {
-		display: inline;
-		margin-right: 30px;
-	}	
-	
-	ul li input[type=radio]{
-		visibility: hidden;
-		float: left;
-		display: none;
-	}
-
-	ul li .check::before {
-		position: absolute;
-		content: '';
-		border-radius: 100%;
-		height: 15px;
-		width: 15px;
-		top: 5px;
-		left: 5px;
-		margin: auto;
-		transition: background 0.25s linear;
-		-webkit-transition: background 0.25s linear;
-	}
-
-	input[type=radio]:not(:checked) ~ .check {
-		border: 5px solid rgb(227, 131, 127);
-	}
-
-	input[type=radio]:not(:checked) ~ .check::before{
-		background: rgb(227, 131, 127);
-	}
-
-	input[type=radio]:not(:checked) ~ label{
-		color: rgb(227, 131, 127);
-	}	
-	
-	input[type=radio]:checked ~ .check {
-		border: 5px solid #7fdfe3;
-	}
-
-	input[type=radio]:checked ~ .check::before{
-		background: #7fdfe3;
-	}
-
-	input[type=radio]:checked ~ label{
-		color: #7fdfe3;
-		border: 1px solid #7fdfe3;
-	}
-</style>	
-	
-<script>
-$(document).ready(function(){
-
-$(".container-rect").addClass("animated bounceInUp");	
-	
-$(".chan-links").mouseover(function(){
-	$('.chan-cat').css("border-right", "2px solid #7fdfe3");
-});
-$(".chan-links").mouseout(function(){
-	$('.chan-cat').css("border-right", "1px solid #7fdfe3");
-});
-$(".news-links").mouseover(function(){
-	$('.news-cat').css("border-right", "2px solid #e37fad");
-});	
-$(".news-links").mouseout(function(){
-	$('.news-cat').css("border-right", "1px solid #e37fad");
-});	
-	
-	
-$("#search-bar").keypress(function(event) {
-var searchQuery = $("#search-bar").val();
-  if ( event.which == 13 ) {
-    window.location.href = 'http://www.google.com/search?q=' + searchQuery;
-  }
-}); // END Keypress Function		
-	
-$(".settings").hide();
-$(".fa-gear").click(function(){
-	$(".settings").slideToggle();
-});
-$(".x").click(function(){
-	$(".settings").slideToggle();
-});
-		
-if (localStorage.getItem("locCity") == null) {
-	localStorage.setItem("locCity", "kelowna")
-}
-	
-if (localStorage.getItem("locCountry") == null) {
-	localStorage.setItem("locCountry", "ca")
-}
-if (localStorage.getItem("unit") == null) {
-	localStorage.setItem("unit", "&deg;C")
-	$("#cel").attr('checked', 'checked');
-} else if(localStorage.getItem("unit") == "&deg;C") {
-	$("#cel").attr('checked', 'checked');
-} else if(localStorage.getItem("unit") == "&deg;F") {
-	$("#far").attr('checked', 'checked');
-}
-	
-var baseURL = "http://api.openweathermap.org/data/2.5/weather?q=";
-var city = localStorage.getItem('locCity');
-var country = localStorage.getItem('locCountry')
-var key = "&APPID=15dac795069e9f6ef5b3c4c435136247";	
-var apiurl = baseURL + city + "," + country + key;	
-var unit = localStorage.getItem('unit');
-	
-$(".entercity").attr("value", city);
-$(".entercountry").attr("value", country);
-	
-function getWeather() {
-	var baseURL = "http://api.openweathermap.org/data/2.5/weather?q=";
-	var city = localStorage.getItem('locCity');
-	var country = localStorage.getItem('locCountry')
-	var key = "&APPID=15dac795069e9f6ef5b3c4c435136247";	
-	var apiurl = baseURL + city + "," + country + key;	
-	var unit = localStorage.getItem('unit');
-	
-	$.getJSON(apiurl,function(result){
-    	console.log(result);
-		var temp = result.main.temp;
-		if (localStorage.getItem("unit") == "&deg;C") {
-			temp = temp - 273.15;
-			temp = Math.round(temp);
-		} else if (localStorage.getItem("unit") == "&deg;F") {
-			temp = temp - 273.15;
-			temp = temp * 1.8;
-			temp = temp + 32;
-			temp = Math.round(temp);
-		}
-		
-		$("#weather").empty().append(result.name + ": " + temp + " " + unit + ", " + result.weather[0].description);
-	});
-}	
-getWeather();
-	
-$("#save").click(function(){
-	if ($('.entercity').length > 0 && $('.entercity').val() != '') {
-		localStorage.setItem("locCity", $(".entercity").val());
-	}
-	if ($('.entercountry').length > 0 && $('.entercountry').val() != '') {
-		localStorage.setItem("locCountry", $(".entercountry").val());
-	}
-	if ($('input[id=far]').is(":checked")) {
-		localStorage.setItem("unit", "&deg;F");
-	}
-	if ($('input[id=cel]').is(":checked")) {
-		localStorage.setItem("unit", "&deg;C");
-	}
-	getWeather();
-	$(".settings").slideToggle();
-});	
-	
-//Date Functionality
-var date = new Date();
-var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-var weekday = weekdays[date.getDay()];
-var month = date.getMonth();
-var monthday = date.getDate();
-var year = date.getYear();	
-
-$('#weekday').html(weekday);
-	
-switch (monthday) {
-	case 1:
-	case 21: 
-	case 31:
-    	var affix = "st";
-		$('#month-date').html(months[month] + " " + monthday + "<sup>" + affix + "</sup> " + ", " + (year+1900));
-    	break;
-	case 2: 
-	case 22:
-    	var affix = "nd";
-		$('#month-date').html(months[month] + " " + monthday + "<sup>" + affix + "</sup> " + ", " + (year+1900));
-    	break;
-	case 3: 
-	case 23:
-     	var affix = "rd";
-		$('#month-date').html(months[month] + " " + monthday + "<sup>" + affix + "</sup> " + ", " + (year+1900));
-   	break;
-	case 4: 
-	case 5: 
-	case 6: 
-	case 7: 
-	case 8: 
-	case 9: 
-	case 10: 
-	case 11: 
-	case 12: 
-	case 13: 
-	case 14: 
-	case 15: 
-	case 16: 
-	case 17: 
-	case 18: 
-	case 19: 
-	case 20: 
-	case 24: 
-	case 25: 
-	case 26: 
-	case 27: 
-	case 28: 
-	case 29:
-	case 30:
-   	var affix = "th";
-		$('#month-date').html(months[month] + " " + monthday + "<sup>" + affix + "</sup> " + ", " + (year+1900));
-}		
-	
-// Current Bitcoin Price Function	
-function btcprice() {
-var currency = "USD";
-var apiurl = 'https://api.coindesk.com/v1/bpi/currentprice/' + currency + '.json';
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
-$.ajax({
-  type: "GET",
-  url: apiurl,
-  async: false,
-  dataType: 'json',
-  success: function(data){ 
-    var price = data["bpi"][currency]["rate_float"];
-	  var priceRounded = Math.round(price);
-	  $("#btc-price").append("$" + priceRounded + " " + currency);
-    }, 
-  error: function(errorMessage){
-      alert("ajax call failed");
-    }  
-}); // END ajax call	
-}
-btcprice();	
+    <title>Home</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="favicon.png" rel="shortcut icon" type="image/x-icon" />
+</head>
+<body>
+    <div id="search">
+        <input id="search-field" type="text" name="search-field" onkeypress="return search(event)"/>
+    </div>
+    <div class="container">
+        <div id="clock"></div>
+        <div class="weather-container">
+            <div class="row">
+                <div id="weather-description"class="inline"></div>
+                <div class="inline">-</div>
+                <div id="temp" class="inline"></div>
+            </div>
+        </div>
+        <div class="bookmark-container">
+            <div class="bookmark-set">
+                <div class="bookmark-title">Chans</div>
+                <div class="bookmark-inner-container">
+                    <a class="bookmark" href="https://8ch.net/tech/catalog.html" target="_blank">/tech/</a>
+                    <a class="bookmark" href="https://boards.4channel.org/g/catalog" target="_blank">/g/</a>
+                    <a class="bookmark" href="https://boards.4channel.org/an/catalog" target="_blank">/an/</a>
+                    <a class="bookmark" href="https://boards.4channel.org/ck/catalog" target="_blank">/ck/</a>
+                    <a class="bookmark" href="https://boards.4chan.org/wg/catalog" target="_blank">/wg/</a>                    
+                </div>
+            </div>
+            <div class="bookmark-set">
+                <div class="bookmark-title">Entertainment</div>
+                <div class="bookmark-inner-container">
+                    <a class="bookmark" href="https://youtube.com" target="_blank">Youtube</a>
+                    <a class="bookmark" href="https://kiwifarms.net" target="_blank">The Farms</a>
+                    <a class="bookmark" href="https://r-a-d.io/" target="_blank">r-a-d.io</a>
+                    <a class="bookmark" href="https://overthewire.org/wargames/" target="_blank">Over the Wire</a>
+                </div>
+            </div>
+            <div class="bookmark-set">
+            <div class="bookmark-title">Tech</div>
+                <div class="bookmark-inner-container">
+                    <a class="bookmark" href="https://github.com" target="_blank">Github</a>
+                    <a class="bookmark" href="https://gitgud.io/users/sign_in" target="_blank">Gitgud</a>
+                    <a class="bookmark" href="https://doc.rust-lang.org/book/" target="_blank">Rust Docs</a>
+                    <a class="bookmark" href="https://crates.io/" target="_blank">Rust Crates</a>
+                    <a class="bookmark" href="https://wiki.installgentoo.com/index.php/Main_Page" target="_blank">InstallGentoo Wiki</a>                    
+                    <a class="bookmark" href="https://distrowatch.com" target="_blank">Distrowatch</a>
+                </div>
+            </div>
+            <div class="bookmark-set">
+                <div class="bookmark-title">Misc</div>
+                <div class="bookmark-inner-container">
+		    <a class="bookmark" href="https://mail.protonmail.com/login" target="_blank">Protonmail</a>
+                    <a class="bookmark" href="https://the-eye.eu/public/" target="_blank">The Eye</a>
+                    <a class="bookmark" href="https://app.remote.it/auth/#/sign-in" target="_blank">remote.it</a>
+                    <a class="bookmark" href="https://wallhalla.com/" target="_blank">Wallhalla</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-var subreddit = "News";
-var apiurl = 'https://www.reddit.com/r/' + subreddit + '/.json?';
-var postnum = 1;
-	
-function updatepost() {
-    $.ajax({
-      type: "GET",
-      url: apiurl,
-      async: false,
-      dataType: 'json',
-      success: function(data){ 
-        var title = data["data"]["children"][postnum]["data"]["title"];
-		var score = data["data"]["children"][postnum]["data"]["score"];
-		  	$("#news-title").empty().prepend(title);
-		  	$("#score-3").empty().append('<i class="fa fa-heart"> </i>' + ' ' + score);
-		  	$("#news-title-link").attr("href","https://reddit.com" + data["data"]["children"][postnum]["data"]["permalink"]);
-      	}, 
-      	error: function(errorMessage){
-        	alert("Reddit ajax call failed");
-  		}      
-    }); // END ajax call
-} // End Update Post function
-updatepost();
-	
-$("#next-post-news").click(function(){
-	postnum = postnum+2;
-	updatepost();
-});	
-	
-});	
-</script>	
-	
+    <script>
+        // Search on enter key event
+        function search(e) {
+            if (e.keyCode == 13) {
+                var val = document.getElementById("search-field").value;
+                window.open("https://google.com/search?q=" + val);
+            }
+        }
+        // Get current time and format
+        function getTime() {
+            let date = new Date(),
+                min = date.getMinutes(),
+                sec = date.getSeconds(),
+                hour = date.getHours() + 19;
+
+            return "" + 
+                (hour < 10 ? ("0" + hour) : hour) + ":" + 
+                (min < 10 ? ("0" + min) : min) + ":" + 
+                (sec < 10 ? ("0" + sec) : sec);
+        }
+
+        window.onload = () => {
+            let xhr = new XMLHttpRequest();
+            // Request to open weather map
+            xhr.open('GET', 'http://api.openweathermap.org/data/2.5/weather?id=5106834&units=imperial&appid=e5b292ae2f9dae5f29e11499c2d82ece');
+            xhr.onload = () => {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        let json = JSON.parse(xhr.responseText);
+                        console.log(json);
+                        document.getElementById("temp").innerHTML = json.main.temp.toFixed(0) + " F";
+                        document.getElementById("weather-description").innerHTML = json.weather[0].description;
+                    } else {
+                        console.log('error msg: ' + xhr.status);
+                    }
+                }
+            }
+            xhr.send();
+            // Set up the clock
+            document.getElementById("clock").innerHTML = getTime();
+            // Set clock interval to tick clock
+            setInterval( () => {
+                document.getElementById("clock").innerHTML = getTime();
+            },100);
+        }
+
+        document.addEventListener("keydown", event => {
+            if (event.keyCode == 32) {          // Spacebar code to open search
+                document.getElementById('search').style.display = 'flex';
+                document.getElementById('search-field').focus();
+            } else if (event.keyCode == 27) {   // Esc to close search
+                document.getElementById('search-field').value = '';
+                document.getElementById('search-field').blur();
+                document.getElementById('search').style.display = 'none';
+            }
+        });
+    </script>
 </body>
+</html>
